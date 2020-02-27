@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'icomoon';
+  src:
+    url('../fonts/icomoon.ttf?gbiwb3') format('truetype'),
+    url('../fonts/icomoon.woff?gbiwb3') format('woff'),
+    url('../fonts/icomoon.svg?gbiwb3#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-hand-o-right:before {
+  content: "\e918";
+}
+.icon-arrow-left:before {
+  content: "\e912";
+}
+.icon-chevron-left:before {
+  content: "\e913";
+}
+.icon-repeat:before {
+  content: "\e914";
+}
+.icon-rotate-right:before {
+  content: "\e914";
+}
+.icon-caret-square-o-right:before {
+  content: "\e915";
+}
+.icon-toggle-right:before {
+  content: "\e915";
+}
+.icon-arrow-right:before {
+  content: "\e916";
+}
+.icon-chevron-right:before {
+  content: "\e917";
+}
+.icon-list:before {
+  content: "\e911";
+}
+.icon-calendar-check-o:before {
+  content: "\e905";
+}
+.icon-check-square-o:before {
+  content: "\e906";
+}
+.icon-check:before {
+  content: "\e907";
+}
+.icon-close:before {
+  content: "\e908";
+}
+.icon-remove:before {
+  content: "\e908";
+}
+.icon-times:before {
+  content: "\e908";
+}
+.icon-search:before {
+  content: "\e909";
+}
+.icon-question:before {
+  content: "\e90a";
+}
+.icon-shopping-cart:before {
+  content: "\e90b";
+}
+.icon-cart-plus:before {
+  content: "\e90c";
+}
+.icon-github:before {
+  content: "\e90d";
+}
+.icon-qrcode:before {
+  content: "\e90e";
+}
+.icon-code:before {
+  content: "\e90f";
+}
+.icon-gamepad:before {
+  content: "\e910";
+}
+.icon-video-camera:before {
+  content: "\e904";
+}
+.icon-music:before {
+  content: "\e900";
+}
+.icon-image:before {
+  content: "\e901";
+}
+.icon-photo:before {
+  content: "\e901";
+}
+.icon-picture-o:before {
+  content: "\e901";
+}
+.icon-chevron-circle-right:before {
+  content: "\e902";
+}
+.icon-chevron-circle-left:before {
+  content: "\e903";
+}

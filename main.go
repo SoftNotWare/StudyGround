@@ -2,48 +2,72 @@ package main
 
 import (
 	"html/template"
+	"io/ioutil"
 	"net/http"
+	"path/filepath"
 
+	"github.com/gin-contrib/multitemplate"
 	"github.com/gin-gonic/gin"
-	"github.com/siddontang/go/log"
-	"github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	ginlogrus "github.com/toorop/gin-logrus"
 
 	"os"
 )
 
 func setup(r *gin.Engine) {
-	logrus.SetOutput(os.Stdout)
-	logrus.SetFormatter(&logrus.TextFormatter{
+	log.SetOutput(os.Stdout)
+	log.SetFormatter(&log.TextFormatter{
 		DisableColors: true,
 		FullTimestamp: true,
 	})
-	logrus.SetLevel(logrus.WarnLevel)
+	log.SetLevel(log.WarnLevel)
 
 	// 安装logrus日志中间件
-	log := logrus.New()
-	log.SetLevel(logrus.WarnLevel)
-	r.Use(ginlogrus.Logger(log), gin.Recovery())
+	l := log.New()
+	l.SetLevel(log.WarnLevel)
+	r.Use(ginlogrus.Logger(l), gin.Recovery())
+}
+
+func loadTemplates(templatesDir string) multitemplate.Renderer {
+	r := multitemplate.NewRenderer()
+	fis, err := ioutil.ReadDir(templatesDir)
+	if err != nil {
+		log.Fatal("加载html模板失败：", err)
+	}
+
+	for _, fi := range fis {
+		if fi.IsDir() || filepath.Ext(fi.Name()) != ".html" {
+			continue
+		}
+
+		name := filepath.Base(fi.Name())
+		tpl := template.New(name)
+		tpl.Delims("{#", "#}")
+		tpl = template.Must(tpl.ParseFiles(filepath.Join(templatesDir, fi.Name())))
+		r.Add(name, tpl)
+	}
+
+	return r
 }
 
 func main() {
-	r := gin.New()
 
+	r := gin.New()
 	setup(r)
+	r.HTMLRender = loadTemplates("www")
 
 	r.Static("js", "www/js")
 	r.Static("css", "www/css")
+	r.Static("image", "www/image")
+	r.Static("fonts", "www/fonts")
 	r.Static("danmu", "www/danmu")
 
-	var err error
-	tpl := template.New("index")
-	tpl, err = tpl.ParseFiles("www/index.html")
-	if err != nil {
-		log.Fatal("载入index模板失败：", err)
-	}
-	r.SetHTMLTemplate(tpl)
 	r.GET("/", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "index.html", nil)
+	})
+
+	r.GET("/play", func(ctx *gin.Context) {
+		ctx.HTML(http.StatusOK, "play.html", nil)
 	})
 
 	log.Info("服务器启动成功")
