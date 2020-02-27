@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习广场</title>
+    <link rel="stylesheet" href="css/base.min.css" type="text/css" />
+</head>
+
+<body>
+    <h2>莫慌，还啥都没有</h2>
+
+    <video id="video-1" autobuffer="true" data-setup="{}" width="800" height="450">
+        <source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.mp4" type="video/mp4">
+        <source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.webm" type="video/webm">
+        <p>Your browser does not support html5 video!</p>
+    </video>
+    <video id="video-2" style="display:none;" data-setup="{}" width="800" height="450">
+        <source src="//static.cdn.moe/ccltestingvideos/outer_science.webm" type="video/webm">
+        <source src="//static.cdn.moe/ccltestingvideos/outer_science.mp4" type="video/mp4">
+        <p>Your browser does not support html5 video!</p>
+    </video>
+
+    <div id="load-player"></div>
+</body>
+
+
+
+<script src="js/CommentCoreLibrary.min.js"></script>
+<script src="js/ABPlayerHTML5.min.js"></script>
+<script>
+    ABP.create(document.getElementById("load-player"), {
+        "src": {
+            "playlist": [
+                {
+                    "video": document.getElementById("video-1"),
+                    "comments": "danmu/comment-otsukimi.xml"
+                },
+                {
+                    "video": document.getElementById("video-2"),
+                    "comments": "danmu/comment-science.xml"
+                }
+            ]
+        },
+        "width": 800,
+        "height": 522
+    });
+</script>
+
+</html>
