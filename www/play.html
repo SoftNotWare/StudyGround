@@ -1,50 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>视频名称</title>
-
-    <link rel="stylesheet" href="css/base.min.css" type="text/css" />
+    <title>学习广场</title>
+    <link rel="stylesheet" href="css/ABPlayerH5.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/buefy.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <div id="play">
+        <div class="container">
+            <template>
+                <b-navbar type="is-light" fixed-top>
+                    <template slot="brand">
+                        <b-navbar-item>
+                            <img src="image/logo.png" alt="易学习">
+                        </b-navbar-item>
+                    </template>
+                    <template slot="start">
+                        <b-navbar-item href="#">
+                            课程库
+                        </b-navbar-item>
+                        <b-navbar-item href="#">
+                            VIP
+                        </b-navbar-item>
+                        <b-navbar-item href="#">
+                            充值
+                        </b-navbar-item>
+                        <b-navbar-item href="#">
+                            师资
+                        </b-navbar-item>
+                        <b-navbar-item href="#">
+                            社区
+                        </b-navbar-item>
+                        <b-navbar-item href="#">
+                            积分商城
+                        </b-navbar-item>
+                        <b-navbar-item href="#">
+                            积分商城
+                        </b-navbar-item>
+                        <b-navbar-dropdown label="帮助">
+                            <b-navbar-item href="#">
+                                关于
+                            </b-navbar-item>
+                            <b-navbar-item href="#">
+                                联系我们
+                            </b-navbar-item>
+                        </b-navbar-dropdown>
+                    </template>
 
-    <video id="video-1" autobuffer="true" data-setup="{}" width="800" height="450">
-        <source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.mp4" type="video/mp4">
-        <source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.webm" type="video/webm">
-        <p>Your browser does not support html5 video!</p>
-    </video>
-    <video id="video-2" style="display:none;" data-setup="{}" width="800" height="450">
-        <source src="//static.cdn.moe/ccltestingvideos/outer_science.webm" type="video/webm">
-        <source src="//static.cdn.moe/ccltestingvideos/outer_science.mp4" type="video/mp4">
-        <p>Your browser does not support html5 video!</p>
-    </video>
+                    <template slot="end">
+                        <b-navbar-item tag="div">
+                            <div class="buttons">
+                                <a class="button is-primary">
+                                    <strong>注册</strong>
+                                </a>
+                                <a class="button is-light">
+                                    登录
+                                </a>
+                            </div>
+                        </b-navbar-item>
+                    </template>
+                </b-navbar>
+            </template>
 
-    <div id="load-player"></div>
+            <h2>视频名称：两只黄鹂鸣翠柳</h2>
+            <div class="columns">
+                <div class="column">
+                    <video id="video-1" autobuffer="true" data-setup="{}" width="800" height="450">
+                        <source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.mp4" type="video/mp4">
+                        <source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.webm" type="video/webm">
+                        <p>Your browser does not support html5 video!</p>
+                    </video>
+                    <video id="video-2" style="display:none;" data-setup="{}" width="800" height="450">
+                        <source src="//static.cdn.moe/ccltestingvideos/outer_science.webm" type="video/webm">
+                        <source src="//static.cdn.moe/ccltestingvideos/outer_science.mp4" type="video/mp4">
+                        <p>Your browser does not support html5 video!</p>
+                    </video>
+
+                    <div id="load-player"></div>
+                </div>
+                <div class="column">
+                    <b-menu>
+                        <b-menu-list label="播放列表">
+                            <b-menu-item icon-pack="icon" v-for="item in playlist" :label="item.title"
+                                :active="item.active" :icon="item.active ? 'icon-video-camera':''"></b-menu-item>
+                        </b-menu-list>
+                    </b-menu>
+                </div>
+            </div>
+
+            <nav class="level is-mobile">
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">播放</p>
+                        <p class="title">3,456</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">喜欢</p>
+                        <p class="title">789</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">收藏</p>
+                        <p class="title">123</p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">讨论</p>
+                        <p class="title">456K</p>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
 
-    <script src="js/CommentCoreLibrary.min.js"></script>
-    <script src="js/ABPlayerHTML5.min.js"></script>
-    <script>
-        ABP.create(document.getElementById("load-player"), {
-            "src": {
-                "playlist": [
-                    {
-                        "video": document.getElementById("video-1"),
-                        "comments": "danmu/comment-otsukimi.xml"
-                    },
-                    {
-                        "video": document.getElementById("video-2"),
-                        "comments": "danmu/comment-science.xml"
-                    }
-                ]
-            },
-            "width": 800,
-            "height": 522
-        });
-    </script>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>eStudy</strong> by <a href="https://github.com/orgs/SoftNotWare">SoftNotWare</a>. The source
+                code is licensed
+                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+            </p>
+        </div>
+    </footer>
 </body>
+
+
+<script src="js/CommentCoreLibrary.min.js"></script>
+<script src="js/ABPlayerHTML5.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/buefy.min.js"></script>
+<script src="js/play.js"></script>
 
 </html>

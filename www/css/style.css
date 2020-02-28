@@ -3,3 +3,13 @@ h3 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 }
+
+h2 {
+    font-size: 32px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.is-clickable{
+    cursor: pointer;
+}

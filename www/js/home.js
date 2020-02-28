@@ -1,7 +1,6 @@
 
-
 new Vue({
-    el: '#app',
+    el: '#home',
     data: {
         carousels: [
             { text: '看成败', color: 'primary' },
@@ -9,6 +8,58 @@ new Vue({
             { text: '只不过是', color: 'success' },
             { text: '从头再来', color: 'warning' },
             { text: '……', color: 'danger' }
+        ],
+        tiles1: [
+            {
+                title: '临',
+                subtitle: "甲"
+            },
+            {
+                title: '兵',
+                subtitle: "乙"
+            },
+            {
+                title: '斗',
+                subtitle: "丙"
+            },
+            {
+                title: '者',
+                subtitle: "丁"
+            },
+            {
+                title: '皆',
+                subtitle: "戊"
+            },
+            {
+                title: '阵',
+                subtitle: "己"
+            }
+        ],
+        tiles2: [
+            {
+                title: '太极',
+                subtitle: ""
+            },
+            {
+                title: '两仪',
+                subtitle: ""
+            },
+            {
+                title: '四象',
+                subtitle: ""
+            },
+            {
+                title: '八卦',
+                subtitle: ""
+            },
+            {
+                title: '吉凶',
+                subtitle: ""
+            },
+            {
+                title: '大业',
+                subtitle: ""
+            }
         ],
         activeTab: 0,
         tabs: [
@@ -72,8 +123,22 @@ new Vue({
         ]
     },
     methods: {
-        info(value) {
-            this.videoPage = value
+        jumpTo(href) {
+            console.log("trigger ...    ")
+            // 防止反复添加
+            var a = document.getElementById('_jumpTo')
+            if (a) {
+                document.body.removeChild(a)
+                a.setAttribute('href', href)
+            } else {
+                a = document.createElement('a')
+                a.setAttribute('href', href)
+                a.setAttribute('target', '_blank')
+                a.setAttribute('id', '_jumpTo')
+                document.body.appendChild(a)
+            }
+
+            a.click()
         }
     }
 })

@@ -4,27 +4,30 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"path/filepath"
 
 	"github.com/gin-contrib/multitemplate"
 	"github.com/gin-gonic/gin"
-	log "github.com/sirupsen/logrus"
+	"github.com/sirupsen/logrus"
 	ginlogrus "github.com/toorop/gin-logrus"
-
-	"os"
 )
 
-func setup(r *gin.Engine) {
-	log.SetOutput(os.Stdout)
-	log.SetFormatter(&log.TextFormatter{
+var log *logrus.Logger
+
+func init() {
+	log = logrus.New()
+	logrus.SetOutput(os.Stdout)
+	logrus.SetFormatter(&logrus.TextFormatter{
 		DisableColors: true,
 		FullTimestamp: true,
 	})
-	log.SetLevel(log.WarnLevel)
+	logrus.SetLevel(logrus.WarnLevel)
+}
 
+func setup(r *gin.Engine) {
 	// 安装logrus日志中间件
-	l := log.New()
-	l.SetLevel(log.WarnLevel)
+	l := logrus.New()
 	r.Use(ginlogrus.Logger(l), gin.Recovery())
 }
 
@@ -45,13 +48,13 @@ func loadTemplates(templatesDir string) multitemplate.Renderer {
 		tpl.Delims("{#", "#}")
 		tpl = template.Must(tpl.ParseFiles(filepath.Join(templatesDir, fi.Name())))
 		r.Add(name, tpl)
+		log.Info("增加模板：", name, filepath.Join(templatesDir, fi.Name()))
 	}
 
 	return r
 }
 
 func main() {
-
 	r := gin.New()
 	setup(r)
 	r.HTMLRender = loadTemplates("www")
@@ -63,7 +66,7 @@ func main() {
 	r.Static("danmu", "www/danmu")
 
 	r.GET("/", func(ctx *gin.Context) {
-		ctx.HTML(http.StatusOK, "index.html", nil)
+		ctx.HTML(http.StatusOK, "home.html", nil)
 	})
 
 	r.GET("/play", func(ctx *gin.Context) {
