@@ -13,58 +13,82 @@
 <body>
     <div id="home">
         <div class="container">
-            <template>
-                <b-navbar type="is-light" fixed-top>
-                    <template slot="brand">
-                        <b-navbar-item>
-                            <img src="image/logo.png" alt="易学习">
-                        </b-navbar-item>
-                    </template>
-                    <template slot="start">
+            <b-navbar type="is-light" fixed-top>
+                <template slot="brand">
+                    <b-navbar-item>
+                        <img src="image/logo.png" alt="易学习">
+                    </b-navbar-item>
+                </template>
+                <template slot="start">
+                    <b-navbar-item href="#">
+                        课程库
+                    </b-navbar-item>
+                    <b-navbar-item href="#">
+                        VIP
+                    </b-navbar-item>
+                    <b-navbar-item href="#">
+                        充值
+                    </b-navbar-item>
+                    <b-navbar-item href="#">
+                        师资
+                    </b-navbar-item>
+                    <b-navbar-item href="#">
+                        社区
+                    </b-navbar-item>
+                    <b-navbar-item href="#">
+                        积分商城
+                    </b-navbar-item>
+                    <b-navbar-item href="#">
+                        积分商城
+                    </b-navbar-item>
+                    <b-navbar-dropdown label="帮助">
                         <b-navbar-item href="#">
-                            课程库
+                            关于
                         </b-navbar-item>
                         <b-navbar-item href="#">
-                            VIP
+                            联系我们
                         </b-navbar-item>
-                        <b-navbar-item href="#">
-                            充值
-                        </b-navbar-item>
-                        <b-navbar-item href="#">
-                            师资
-                        </b-navbar-item>
-                        <b-navbar-item href="#">
-                            社区
-                        </b-navbar-item>
-                        <b-navbar-item href="#">
-                            积分商城
-                        </b-navbar-item>
-                        <b-navbar-item href="#">
-                            积分商城
-                        </b-navbar-item>
-                        <b-navbar-dropdown label="帮助">
-                            <b-navbar-item href="#">
-                                关于
-                            </b-navbar-item>
-                            <b-navbar-item href="#">
-                                联系我们
-                            </b-navbar-item>
-                        </b-navbar-dropdown>
-                    </template>
+                    </b-navbar-dropdown>
+                </template>
 
-                    <template slot="end">
-                        <b-navbar-item tag="div">
-                            <div class="buttons">
-                                <a class="button is-primary">
-                                    <strong>注册</strong>
+                <template slot="end">
+                    <b-navbar-item tag="div">
+                        <section>
+                            <b-dropdown position="is-bottom-left" aria-role="menu" trap-focus>
+                                <a class="navbar-item" slot="trigger" role="button">
+                                    <span>登录/注册</span>
+                                    <b-icon pack="icon" icon="icon-caret-down"></b-icon>
                                 </a>
-                                <a class="button is-light">
-                                    登录
-                                </a>
-                            </div>
-                        </b-navbar-item>
-                    </template>
-                </b-navbar>
+
+                                <b-dropdown-item aria-role="menu-item" :focusable="false" custom paddingless>
+                                    <form action="">
+                                        <div class="modal-card" style="width:300px;">
+                                            <section class="modal-card-body">
+                                                <b-field label="邮箱">
+                                                    <b-input type="email" placeholder="你的邮箱地址" required>
+                                                    </b-input>
+                                                </b-field>
+
+                                                <b-field label="密码">
+                                                    <b-input type="password" password-reveal placeholder="你的密码"
+                                                        required>
+                                                    </b-input>
+                                                </b-field>
+
+                                                <b-checkbox>记住我</b-checkbox>
+                                            </section>
+                                            <footer class="modal-card-foot">
+                                                <button class="button is-primary">登录/注册</button>
+                                            </footer>
+                                        </div>
+                                    </form>
+                                </b-dropdown-item>
+                            </b-dropdown>
+                        </section>
+
+                    </b-navbar-item>
+                </template>
+            </b-navbar>
             </template>
 
 
@@ -155,25 +179,25 @@
                     </div>
                 </b-tab-item>
             </b-tabs>
-            
         </div>
+    </div>
 
-        <footer class="footer">
-            <div class="content has-text-centered">
-                <p>
-                    <strong>eStudy</strong> by <a href="https://github.com/orgs/SoftNotWare">SoftNotWare</a>. The
-                    source
-                    code is licensed
-                    <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-                </p>
-            </div>
-        </footer>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>
+                <strong>eStudy</strong> by <a href="https://github.com/orgs/SoftNotWare">SoftNotWare</a>. The
+                source
+                code is licensed
+                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+            </p>
+        </div>
+    </footer>
+
+
+    <script src="js/vue.js"></script>
+    <script src="js/buefy.min.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/home.js"></script>
 </body>
-
-
-<script src="js/vue.js"></script>
-<script src="js/buefy.min.js"></script>
-<script src="js/axios.min.js"></script>
-<script src="js/home.js"></script>
 
 </html>
