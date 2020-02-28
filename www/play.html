@@ -70,7 +70,7 @@
 
             <h2>视频名称：两只黄鹂鸣翠柳</h2>
             <div class="columns">
-                <div class="column">
+                <div class="column is-9">
                     <video id="video-1" autobuffer="true" data-setup="{}" width="800" height="450">
                         <source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.mp4" type="video/mp4">
                         <source src="//static.cdn.moe/ccltestingvideos/otsukimi_recital.webm" type="video/webm">
@@ -84,42 +84,62 @@
 
                     <div id="load-player"></div>
                 </div>
-                <div class="column">
+                <div class="column is-3">
                     <b-menu>
                         <b-menu-list label="播放列表">
                             <b-menu-item icon-pack="icon" v-for="item in playlist" :label="item.title"
                                 :active="item.active" :icon="item.active ? 'icon-video-camera':''"></b-menu-item>
                         </b-menu-list>
+                        <b-menu-list label="弹幕列表">
+                            <b-menu-item icon-pack="icon" v-for="item in danmulist" :label="item.title"
+                                :active="item.active"></b-menu-item>
+                        </b-menu-list>
                     </b-menu>
                 </div>
             </div>
 
-            <nav class="level is-mobile">
-                <div class="level-item has-text-centered">
-                    <div>
-                        <p class="heading">播放</p>
-                        <p class="title">3,456</p>
-                    </div>
+            <div class="columns">
+                <div class="column is-9">
+                    <nav class="level is-mobile">
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">播放</p>
+                                <p class="title">3,456</p>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">喜欢</p>
+                                <p class="title">789</p>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">收藏</p>
+                                <p class="title">123</p>
+                            </div>
+                        </div>
+                        <div class="level-item has-text-centered">
+                            <div>
+                                <p class="heading">讨论</p>
+                                <p class="title">456K</p>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
-                <div class="level-item has-text-centered">
-                    <div>
-                        <p class="heading">喜欢</p>
-                        <p class="title">789</p>
-                    </div>
+                <div class="column is-3">
                 </div>
-                <div class="level-item has-text-centered">
-                    <div>
-                        <p class="heading">收藏</p>
-                        <p class="title">123</p>
-                    </div>
-                </div>
-                <div class="level-item has-text-centered">
-                    <div>
-                        <p class="heading">讨论</p>
-                        <p class="title">456K</p>
-                    </div>
-                </div>
-            </nav>
+            </div>
+
+            <div class="is-full more-space">
+                <h4>游戏：Stonshard</h4>
+            </div>
+            <div class="is-full more-space">
+                <b-tag>激动人心</b-tag>
+                <b-tag rounded>虚伪至极</b-tag>
+            </div>
+
+
         </div>
     </div>
 
