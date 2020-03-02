@@ -1,7 +1,13 @@
 
-new Vue({
+
+var vue = new Vue({
     el: '#home',
     data: {
+        isInvalidEmail: false,
+        isInvalidPassword: false,
+        email: '',
+        password: '',
+        isLogin: false,
         carousels: [
             { text: '看成败', color: 'primary' },
             { text: '人生豪迈', color: 'info' },
@@ -163,6 +169,40 @@ new Vue({
             }
 
             a.click()
+        },
+        verifyEmail() {
+            this.email = this.email.trim()
+            if (!/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(this.email)) {
+                this.isInvalidEmail = true
+                return
+            }
+            this.isInvalidEmail = false
+        },
+        verifyPassword() {
+            this.password = this.password.trim()
+            if (! /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/.test(this.password)) {
+                this.isInvalidPassword = true
+                return
+            }
+            this.isInvalidPassword = false
+        },
+
+        login() {
+            if (this.isInvalidEmail || this.isInvalidPassword) {
+                return
+            }
+
+            axios.post('/login', JSON.stringify({
+                email: this.email,
+                pwd: sha256(this.password),
+            })).then(function (response) {
+                console.log("登录、注册成功！", response)
+
+                vue.isLogin = true
+                var data = response.data
+                console.log("isoTime:", datetime.fromisoformat(data.login_at))
+            }).catch(function (error) {
+            })
         }
     }
 })

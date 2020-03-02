@@ -38,9 +38,6 @@
                     <b-navbar-item href="#">
                         积分商城
                     </b-navbar-item>
-                    <b-navbar-item href="#">
-                        积分商城
-                    </b-navbar-item>
                     <b-navbar-dropdown label="帮助">
                         <b-navbar-item href="#">
                             关于
@@ -52,25 +49,29 @@
                 </template>
 
                 <template slot="end">
-                    <b-navbar-item tag="div">
+                    <b-navbar-item tag="div"  v-if="!isLogin">
                         <section>
                             <b-dropdown position="is-bottom-left" aria-role="menu" trap-focus>
                                 <a class="navbar-item" slot="trigger" role="button">
-                                    <span>登录/注册</span>
-                                    <b-icon pack="icon" icon="icon-caret-down"></b-icon>
+                                    <span>登入</span>
+                                    <b-icon icon="caret-down"></b-icon>
                                 </a>
 
                                 <b-dropdown-item aria-role="menu-item" :focusable="false" custom paddingless>
                                     <form action="">
                                         <div class="modal-card" style="width:300px;">
                                             <section class="modal-card-body">
-                                                <b-field label="邮箱">
-                                                    <b-input type="email" placeholder="你的邮箱地址" required>
+                                                <b-field label="邮箱" :type="{'is-danger': isInvalidEmail}"
+                                                    :message="{'email无效': isInvalidEmail}">
+                                                    <b-input type="email" placeholder="你的邮箱地址" v-model="email"
+                                                        maxlength="32" @input="verifyEmail()" required>
                                                     </b-input>
                                                 </b-field>
 
-                                                <b-field label="密码">
+                                                <b-field label="密码" :type="{'is-danger': isInvalidPassword}"
+                                                    :message="{'密码至少包含 数字和英文，长度6-16': isInvalidPassword}">
                                                     <b-input type="password" password-reveal placeholder="你的密码"
+                                                        maxlength="16" v-model="password" @input="verifyPassword()"
                                                         required>
                                                     </b-input>
                                                 </b-field>
@@ -78,23 +79,52 @@
                                                 <b-checkbox>记住我</b-checkbox>
                                             </section>
                                             <footer class="modal-card-foot">
-                                                <button class="button is-primary">登录/注册</button>
+                                                <button class="button is-primary" @click="login()">登录/注册</button>
                                             </footer>
                                         </div>
                                     </form>
                                 </b-dropdown-item>
                             </b-dropdown>
                         </section>
-
                     </b-navbar-item>
+
+                    <div class="navbar-menu" v-if="isLogin">
+                        <div class="navbar-end">
+                            <b-dropdown v-model="navigation" position="is-bottom-left" aria-role="menu">
+                                <a class="navbar-item" slot="trigger" role="button">
+                                    <span>我的</span>
+                                    <b-icon icon="menu-down"></b-icon>
+                                </a>
+
+                                <b-dropdown-item custom aria-role="menuitem">
+                                    登录为 <b>{{ email }}</b>
+                                </b-dropdown-item>
+                                <hr class="dropdown-divider">
+                                <b-dropdown-item has-link aria-role="menuitem">
+                                    <a href="https://google.com" target="_blank">
+                                        <b-icon icon="shopping-cart"></b-icon>
+                                        购物车
+                                    </a>
+                                </b-dropdown-item>
+                                <hr class="dropdown-divider" aria-role="menuitem">
+                                <b-dropdown-item value="settings">
+                                    <b-icon icon="gear"></b-icon>
+                                    设置
+                                </b-dropdown-item>
+                                <b-dropdown-item value="logout" aria-role="menuitem">
+                                    <b-icon icon="sign-out"></b-icon>
+                                    登出
+                                </b-dropdown-item>
+                            </b-dropdown>
+                        </div>
+                    </div>
                 </template>
             </b-navbar>
             </template>
 
 
             <template>
-                <b-carousel indicator-style="is-lines" icon-pack="icon" icon-next="icon-chevron-right"
-                    icon-prev="icon-chevron-left">
+                <b-carousel indicator-style="is-lines">
                     <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
                         <section :class="`hero is-medium is-${carousel.color}`">
                             <div class="hero-body has-text-centered">
@@ -124,20 +154,20 @@
 
             <h3>精品公开课</h3>
             <b-tabs position="is-right" size="is-large">
-                <b-tab-item label="独立游戏" icon-pack="icon" icon="icon-video-camera">
+                <b-tab-item label="独立游戏" icon="video-camera">
 
                     <div class="tile is-ancestor">
                         <div class="tile is-parent" v-for="item in tab1">
                             <div class="tile is-child box">
                                 <div class="card">
-                                    <div class="card-image  is-clickable" v-on:click="jumpTo('play')">
+                                    <div class="card-image  is-clickable" @click="jumpTo('play')">
                                         <figure class="image is-4by3">
                                             <img :src="item.image" alt="占位图">
                                         </figure>
                                     </div>
                                     <div class="card-content">
                                         <div class="content">
-                                            <p class="title is-4  is-clickable" v-on:click="jumpTo('play')">
+                                            <p class="title is-4  is-clickable" @click="jumpTo('play')">
                                                 {{ item.title }}</p>
                                             <p class="subtitle is-6">@{{ item.author }}</p>
                                             <section>
@@ -153,19 +183,19 @@
                     </div>
                 </b-tab-item>
 
-                <b-tab-item label="游戏设计" icon-pack="icon" icon="icon-gamepad">
+                <b-tab-item label="游戏设计" icon="gamepad">
                     <div class="tile is-ancestor">
                         <div class="tile is-parent" v-for="item in tab2">
                             <div class="tile is-child box">
                                 <div class="card">
-                                    <div class="card-image  is-clickable" v-on:click="jumpTo('play')">
+                                    <div class="card-image  is-clickable" @click="jumpTo('play')">
                                         <figure class="image is-4by3">
                                             <img :src="item.image" alt="占位图">
                                         </figure>
                                     </div>
                                     <div class="card-content">
                                         <div class="content">
-                                            <p class="title is-4  is-clickable" v-on:click="jumpTo('play')">
+                                            <p class="title is-4  is-clickable" @click="jumpTo('play')">
                                                 {{ item.title }}</p>
                                             <p class="subtitle is-6">@{{ item.author }}</p>
                                             <section>
@@ -228,6 +258,7 @@
     <script src="js/vue.js"></script>
     <script src="js/buefy.min.js"></script>
     <script src="js/axios.min.js"></script>
+    <script src="js/sha256.min.js"></script>
     <script src="js/home.js"></script>
 </body>
 

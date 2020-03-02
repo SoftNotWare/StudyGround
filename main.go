@@ -4,38 +4,22 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"path/filepath"
 
+	"github.com/SoftNotWare/study-ground/model"
+
+	"github.com/SoftNotWare/study-ground/controller"
 	"github.com/gin-contrib/multitemplate"
 	"github.com/gin-gonic/gin"
-	"github.com/sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
 	ginlogrus "github.com/toorop/gin-logrus"
 )
-
-var log *logrus.Logger
-
-func init() {
-	log = logrus.New()
-	logrus.SetOutput(os.Stdout)
-	logrus.SetFormatter(&logrus.TextFormatter{
-		DisableColors: true,
-		FullTimestamp: true,
-	})
-	logrus.SetLevel(logrus.WarnLevel)
-}
-
-func setup(r *gin.Engine) {
-	// 安装logrus日志中间件
-	l := logrus.New()
-	r.Use(ginlogrus.Logger(l), gin.Recovery())
-}
 
 func loadTemplates(templatesDir string) multitemplate.Renderer {
 	r := multitemplate.NewRenderer()
 	fis, err := ioutil.ReadDir(templatesDir)
 	if err != nil {
-		log.Fatal("加载html模板失败：", err)
+		log.WithFields(log.Fields{"error": err}).Fatal("加载html模板失败")
 	}
 
 	for _, fi := range fis {
@@ -48,15 +32,21 @@ func loadTemplates(templatesDir string) multitemplate.Renderer {
 		tpl.Delims("{#", "#}")
 		tpl = template.Must(tpl.ParseFiles(filepath.Join(templatesDir, fi.Name())))
 		r.Add(name, tpl)
-		log.Info("增加模板：", name, filepath.Join(templatesDir, fi.Name()))
+		log.WithFields(log.Fields{"name": name, "path": filepath.Join(templatesDir, fi.Name())}).Debug("增加模板")
 	}
 
 	return r
 }
 
 func main() {
+	model.InitDB()
+
+	log.SetLevel(log.DebugLevel)
+
 	r := gin.New()
-	setup(r)
+	// 安装logrus日志中间件
+	r.Use(ginlogrus.Logger(log.New()), gin.Recovery())
+
 	r.HTMLRender = loadTemplates("www")
 
 	r.Static("js", "www/js")
@@ -72,6 +62,8 @@ func main() {
 	r.GET("/play", func(ctx *gin.Context) {
 		ctx.HTML(http.StatusOK, "play.html", nil)
 	})
+
+	r.POST("/login", controller.Register)
 
 	log.Info("服务器启动成功")
 
