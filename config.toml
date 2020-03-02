@@ -1,0 +1,2 @@
+
+DSN = "root:root@tcp(10.0.0.3)/lpmall?timeout=3s&writeTimeout=5s&readTimeout=2s&charset=utf8mb4&parseTime=true&loc=Local"
