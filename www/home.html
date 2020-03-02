@@ -179,19 +179,50 @@
                     </div>
                 </b-tab-item>
             </b-tabs>
+
+
+            <footer class="footer">
+                <div class="content">
+                    <div class="columns">
+                        <div class="column is-3">
+                            <article class="">
+                                <h3>在线教育平台</h3>
+                                <p>专业、热情</p>
+                            </article>
+                        </div>
+                        <div class="column is-2">
+                            <ul v-for="item in footersupport">
+                                <li>{{ item }}</li>
+                            </ul>
+                        </div>
+                        <div class="column is-2">
+                            <ul v-for="item in footerhelp">
+                                <li>{{ item }}</li>
+                            </ul>
+                        </div>
+                        <div class="column is-2">
+                            <ul v-for="item in footerabout">
+                                <li>{{ item }}</li>
+                            </ul>
+                        </div>
+                        <div class="column is-3">
+                            <h3>友情链接</h3>
+                            <ul v-for="item in footerlinks">
+                                <li>{{ item }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="has-text-centered">
+                    <strong>eStudy</strong> by <a href="https://github.com/orgs/SoftNotWare">SoftNotWare</a>. The
+                    source
+                    code is licensed
+                    <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+                </p>
+            </footer>
         </div>
     </div>
-
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <p>
-                <strong>eStudy</strong> by <a href="https://github.com/orgs/SoftNotWare">SoftNotWare</a>. The
-                source
-                code is licensed
-                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
-            </p>
-        </div>
-    </footer>
 
 
     <script src="js/vue.js"></script>

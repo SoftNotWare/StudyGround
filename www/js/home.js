@@ -120,6 +120,30 @@ new Vue({
                 image: 'image/placeholder-1280x960.png',
                 author: '一不拉稀摸围棋'
             }
+        ],
+        footersupport: [
+            '平台保障',
+            '课程录制',
+            '支付问题',
+            '意见反馈',
+            '侵权投诉'
+        ],
+        footerhelp: [
+            '平台流程',
+            '老师入驻',
+            '老师帮助',
+            '学生帮助',
+            '机构帮助',
+        ],
+        footerabout: [
+            '了解我们',
+            '课程合作',
+            '校园招聘',
+            '社会招聘',
+            '网站条款',
+        ],
+        footerlinks: [
+
         ]
     },
     methods: {
