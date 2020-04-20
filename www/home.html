@@ -49,7 +49,7 @@
                 </template>
 
                 <template slot="end">
-                    <b-navbar-item tag="div"  v-if="!isLogin">
+                    <b-navbar-item tag="div" v-if="!isLogin">
                         <section>
                             <b-dropdown position="is-bottom-left" aria-role="menu" trap-focus>
                                 <a class="navbar-item" slot="trigger" role="button">
@@ -58,31 +58,29 @@
                                 </a>
 
                                 <b-dropdown-item aria-role="menu-item" :focusable="false" custom paddingless>
-                                    <form action="">
-                                        <div class="modal-card" style="width:300px;">
-                                            <section class="modal-card-body">
-                                                <b-field label="邮箱" :type="{'is-danger': isInvalidEmail}"
-                                                    :message="{'email无效': isInvalidEmail}">
-                                                    <b-input type="email" placeholder="你的邮箱地址" v-model="email"
-                                                        maxlength="32" @input="verifyEmail()" required>
-                                                    </b-input>
-                                                </b-field>
+                                    <div class="modal-card" style="width:300px;">
+                                        <section class="modal-card-body">
+                                            <b-field label="邮箱" :type="{'is-danger': isInvalidEmail}"
+                                                :message="{'email无效': isInvalidEmail}">
+                                                <b-input type="email" placeholder="你的邮箱地址" v-model="email"
+                                                    maxlength="32" @input="verifyEmail()" required>
+                                                </b-input>
+                                            </b-field>
 
-                                                <b-field label="密码" :type="{'is-danger': isInvalidPassword}"
-                                                    :message="{'密码至少包含 数字和英文，长度6-16': isInvalidPassword}">
-                                                    <b-input type="password" password-reveal placeholder="你的密码"
-                                                        maxlength="16" v-model="password" @input="verifyPassword()"
-                                                        required>
-                                                    </b-input>
-                                                </b-field>
+                                            <b-field label="密码" :type="{'is-danger': isInvalidPassword}"
+                                                :message="{'密码至少包含 数字和英文，长度6-16': isInvalidPassword}">
+                                                <b-input type="password" password-reveal placeholder="你的密码"
+                                                    maxlength="16" v-model="password" @input="verifyPassword()"
+                                                    required>
+                                                </b-input>
+                                            </b-field>
 
-                                                <b-checkbox>记住我</b-checkbox>
-                                            </section>
-                                            <footer class="modal-card-foot">
-                                                <button class="button is-primary" @click="login()">登录/注册</button>
-                                            </footer>
-                                        </div>
-                                    </form>
+                                            <b-checkbox>记住我</b-checkbox>
+                                        </section>
+                                        <footer class="modal-card-foot">
+                                            <button class="button is-primary" @click="login()">登录/注册</button>
+                                        </footer>
+                                    </div>
                                 </b-dropdown-item>
                             </b-dropdown>
                         </section>
@@ -90,7 +88,7 @@
 
                     <div class="navbar-menu" v-if="isLogin">
                         <div class="navbar-end">
-                            <b-dropdown v-model="navigation" position="is-bottom-left" aria-role="menu">
+                            <b-dropdown position="is-bottom-left" aria-role="menu">
                                 <a class="navbar-item" slot="trigger" role="button">
                                     <span>我的</span>
                                     <b-icon icon="menu-down"></b-icon>
