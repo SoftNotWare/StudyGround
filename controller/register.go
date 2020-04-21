@@ -37,12 +37,12 @@ func makePassword(password string, sha bool) string {
 func Register(ctx *gin.Context) {
 	var p struct {
 		Email    string `json:"email" binding:"required"`
-		Password string `json:"pwd"`
+		Password string `json:"pwd" binding:"required"`
 	}
 	err := ctx.ShouldBindJSON(&p)
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, nil)
-		log.WithFields(log.Fields{"pwd": p.Password, "email": p.Email}).Debug("not found p")
+		log.WithFields(log.Fields{"pwd": p.Password, "email": p.Email}).Debug("param not en")
 		return
 	}
 

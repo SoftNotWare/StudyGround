@@ -67,5 +67,5 @@ func main() {
 
 	log.Info("服务器启动成功")
 
-	r.Run(":2233")
+	r.Run(model.Config.Addr)
 }

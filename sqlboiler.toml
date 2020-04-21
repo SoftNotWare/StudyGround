@@ -1,6 +1,6 @@
 [mysql]
 dbname = "study_ground"
-host = "10.0.0.3"
+host = "10.0.0.6"
 port = 3306
 user = "root"
 pass = "root"
